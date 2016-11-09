@@ -18,7 +18,14 @@ app.get('/', function (req, res) {
 
 // API
 app.get('/api/todos', function (req, res) {
-	res.send(todos);
+	var query = req.query;
+
+	// Some validation
+	if (query.fail) {
+		res.status(500).send('Invalid query parameters');
+	} else {
+		res.send(todos);
+	}
 });
 
 app.get('/api/databases', function (req, res) {

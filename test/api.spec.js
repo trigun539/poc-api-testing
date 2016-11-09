@@ -15,6 +15,17 @@ describe('API ::', function () {
 			});
 	});
 
+	it('GET /api/todos with bad query parameter', function (done) {
+		request
+			.get('/api/todos' + '?fail=true')
+			.expect('Content-Type', /json/)
+			.expect(500)
+			.end(function(err, res) {
+				expect(res.text).to.equal('Invalid query parameters');
+				done();
+			});
+	});
+
 	it('GET /api/databases', function (done) {
 		request
 			.get('/api/databases')
